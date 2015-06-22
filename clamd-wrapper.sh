@@ -3,7 +3,7 @@
 log=/var/log/clamav/clamd.log
 
 trap '{
-    service clamd stop
+   pkill "clamd"
 }' EXIT
 
 fresh_db()
@@ -13,5 +13,6 @@ fresh_db()
     fresh_db
 }
 
-service clamd start
-fresh_db & tail -f -n1 $log
+clamd
+fresh_db &
+tail -f -n1 $log
