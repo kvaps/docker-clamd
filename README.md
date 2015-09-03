@@ -8,8 +8,28 @@ Run
 docker run \
     --name clamd \
     -h clamd \
-    -v /data/clamd:/data:rw \
+    -v /opt/clamd:/data:rw \
     -p 3310:3310 \
     -d \
     kvaps/clamd
+```
+
+Systemd unit
+------------
+
+Example of systemd unit: `/etc/systemd/system/clamd.service`
+
+```bash
+[Unit]
+Description=ClamAV Server
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --name clamd -h clamd -v /opt/clamd:/data kvaps/clamd
+ExecStop=/usr/bin/docker stop -t 5 clamd ; /usr/bin/docker rm -f clamd
+
+[Install]
+WantedBy=multi-user.target
 ```
