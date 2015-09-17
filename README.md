@@ -9,6 +9,7 @@ docker run \
     --name clamd \
     -h clamd \
     -v /opt/clamd:/data:rw \
+    --env TZ=Europe/Moscow \
     -p 3310:3310 \
     -d \
     kvaps/clamd
@@ -27,7 +28,7 @@ Requires=docker.service
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/docker run --name clamd -h clamd -v /opt/clamd:/data kvaps/clamd
+ExecStart=/usr/bin/docker run --name clamd -h clamd -v /opt/clamd:/data --env TZ=Europe/Moscow kvaps/clamd
 ExecStop=/usr/bin/docker stop -t 5 clamd ; /usr/bin/docker rm -f clamd
 
 [Install]
