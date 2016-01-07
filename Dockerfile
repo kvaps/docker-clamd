@@ -1,6 +1,6 @@
 FROM centos:centos6
 MAINTAINER kvaps <kvapss@gmail.com>
-ENV REFRESHED_AT 2015-09-17
+ENV REFRESHED_AT 2016-01-08
 
 
 RUN yum -y install epel-release
