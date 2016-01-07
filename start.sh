@@ -1,12 +1,5 @@
 #!/bin/bash
 
-set_timezone()
-{
-    if [ -f /usr/share/zoneinfo/$TZ ]; then 
-        rm -f /etc/localtime && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
-    fi
-}
-
 dir=(
     /etc/clamd.conf
     /etc/clamd.d
@@ -41,8 +34,6 @@ run()
     #Start command
     /bin/clamd-wrapper.sh 
 }
-
-set_timezone
 
 if [ ! -d /data/etc ] ; then
     move_dirs

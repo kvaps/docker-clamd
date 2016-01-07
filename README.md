@@ -1,36 +1,32 @@
-Clamd in a Docker container
-===============================
+Clamd in a Docker
+=================
 
-Run
----
+Quick start
+-----------
+
+**run command**
 
 ```bash
 docker run \
     --name clamd \
     -h clamd \
     -v /opt/clamd:/data:rw \
-    --env TZ=Europe/Moscow \
     -p 3310:3310 \
     -d \
     kvaps/clamd
 ```
 
-Systemd unit
-------------
+Docker-compose
+--------------
 
-Example of systemd unit: `/etc/systemd/system/clamd.service`
+**docker-compose.yml**
 
-```bash
-[Unit]
-Description=ClamAV Server
-After=docker.service
-Requires=docker.service
-
-[Service]
-Restart=always
-ExecStart=/usr/bin/docker run --name clamd -h clamd -v /opt/clamd:/data --env TZ=Europe/Moscow kvaps/clamd
-ExecStop=/usr/bin/docker stop -t 5 clamd ; /usr/bin/docker rm -f clamd
-
-[Install]
-WantedBy=multi-user.target
+```yaml
+clamd:
+  restart: always
+  image: kvaps/clamd
+  hostname: clamd
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - ./clamd:/data
 ```
