@@ -1,6 +1,6 @@
 FROM centos:centos6
 MAINTAINER kvaps <kvapss@gmail.com>
-ENV REFRESHED_AT 2016-02-05
+ENV REFRESHED_AT 2016-09-29
 
 RUN yum -y install epel-release
 RUN yum -y install clamd
